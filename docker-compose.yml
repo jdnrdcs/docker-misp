@@ -2,9 +2,24 @@ version: '3'
 services:
   mail:
     image: namshi/smtp
+    restart: always
+    container_name: mail
+    read_only: true
+    build:
+      context: ./
+      dockerfile: mail-Dockerfile
+    volumes:
+      - "/opt/misp-web/mail/etc/:/etc/:rw"
+      - "/opt/misp-web/mail/var/:/var/:rw"
+        #- "/tmp/var:/var/:rw"
+    healthcheck:
+      test: ["CMD", "nc", "-v", "-w1", "127.0.0.1", "25"]
+      timeout: 10s
+      retries: 5
 
   redis:
     image: redis:5.0.6
+
 
   db:
     image: mysql:8.0.19
