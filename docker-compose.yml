@@ -11,7 +11,6 @@ services:
     volumes:
       - "/opt/misp-web/mail/etc/:/etc/:rw"
       - "/opt/misp-web/mail/var/:/var/:rw"
-        #- "/tmp/var:/var/:rw"
     healthcheck:
       test: ["CMD", "nc", "-v", "-w1", "127.0.0.1", "25"]
       timeout: 10s
@@ -19,6 +18,15 @@ services:
 
   redis:
     image: redis:5.0.6
+    container_name: redis
+    restart: always
+    read_only: true
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - "/opt/misp-web/redis/data:/data:rw"
 
 
   db:
