@@ -11,10 +11,10 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      - "MYSQL_USER=misp"
-      - "MYSQL_PASSWORD=example"
-      - "MYSQL_ROOT_PASSWORD=password"
-      - "MYSQL_DATABASE=misp"
+      - "MYSQL_USER=${MYSQLUSER}"
+      - "MYSQL_PASSWORD=${MYSQLPASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQLROOTPASSWORD}"
+      - "MYSQL_DATABASE=${MYSQLDATABASE}"
     volumes:
       - /opt/misp-web/mysql/:/var/lib/mysql
     cap_add:
@@ -26,15 +26,15 @@ services:
       - redis
       - db
     ports:
-      - "10.20.6.28:80:80"
-      - "10.20.6.28:443:443"
+      - "${SERVER_NAME}:80:80"
+      - "${SERVER_NAME}:443:443"
     volumes:
       - "/opt/misp-web/server-configs/:/var/www/MISP/app/Config/"
       - "/opt/misp-web/logs/:/var/www/MISP/app/tmp/logs/"
       - "/opt/misp-web/files/:/var/www/MISP/app/files"
       - "/opt/misp-web/ssl/:/etc/nginx/certs"
     environment:
-      - "HOSTNAME=https://10.20.6.28"
+      - "HOSTNAME=https://${SERVER_NAME}"
       - "REDIS_FQDN=redis"
       - "INIT=true"
       - "CRON_USER_ID=1"
