@@ -16,7 +16,7 @@ services:
       - "MYSQL_ROOT_PASSWORD=password"
       - "MYSQL_DATABASE=misp"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - /opt/misp-web/mysql/:/var/lib/mysql
     cap_add:
       - SYS_NICE
 
@@ -29,12 +29,12 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - "./server-configs/:/var/www/MISP/app/Config/"
-      - "./logs/:/var/www/MISP/app/tmp/logs/"
-      - "./files/:/var/www/MISP/app/files"
-      - "./ssl/:/etc/nginx/certs"
+      - "/opt/misp-web/server-configs/:/var/www/MISP/app/Config/"
+      - "/opt/misp-web/logs/:/var/www/MISP/app/tmp/logs/"
+      - "/opt/misp-web/files/:/var/www/MISP/app/files"
+      - "/opt/misp-web/ssl/:/etc/nginx/certs"
     environment:
-      - "HOSTNAME=https://localhost"
+      - "HOSTNAME=https://10.20.6.28"
       - "REDIS_FQDN=redis"
       - "INIT=true"
       - "CRON_USER_ID=1"
