@@ -26,8 +26,8 @@ services:
       - redis
       - db
     ports:
-      - "80:80"
-      - "443:443"
+      - "10.20.6.28:80:80"
+      - "10.20.6.28:443:443"
     volumes:
       - "/opt/misp-web/server-configs/:/var/www/MISP/app/Config/"
       - "/opt/misp-web/logs/:/var/www/MISP/app/tmp/logs/"
