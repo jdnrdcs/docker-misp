@@ -9,8 +9,10 @@ A (nearly) production ready Dockered MISP
 
 host volume<br>
  * docker run -v /home/mysql/lib:/var/lib/mysql<br>
+
 anonymous volume<br>
  * docker run -v /var/lib/mysql<br>
+
 named volume<br>
  * docker run -v name:/var/lib/mysql<br>
 
