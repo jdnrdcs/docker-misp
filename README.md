@@ -7,12 +7,12 @@
 
 A (nearly) production ready Dockered MISP
 
-host volume
- docker run -v /home/mysql/lib:/var/lib/mysql
-anonymous volume
- docker run -v /var/lib/mysql
-named volume
- docker run -v name:/var/lib/mysql
+host volume<br>
+ * docker run -v /home/mysql/lib:/var/lib/mysql<br>
+anonymous volume<br>
+ * docker run -v /var/lib/mysql<br>
+named volume<br>
+ * docker run -v name:/var/lib/mysql<br>
 
 This is based on some of the work from the DSCO docker build, nearly all of the details have been rewritten.
 
